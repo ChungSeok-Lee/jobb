@@ -27,4 +27,4 @@ for num in range(1, 280):
 df_url = pd.DataFrame(url_list)
 # print(df_url.columns)
 
-df_url.to_csv('url_list.csv', index=False)
+df_url.to_csv('./raw_data/url_list.csv', index=False)
