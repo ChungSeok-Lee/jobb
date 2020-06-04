@@ -1,0 +1,6 @@
+[0603/131449.914:ERROR:file_io_win.cc(170)] CreateFile C:\Users\SUNDOO~1\AppData\Local\Temp\scoped_dir8360_364683625\Crashpad\reports\e4c7c934-816b-4efd-9ab8-8f82c95a2d43.dmp: 지정된 경로를 찾을 수 없습니다. (0x3)
+[0603/131449.915:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[0603/143222.226:ERROR:file_io_win.cc(170)] CreateFile C:\Users\SUNDOO~1\AppData\Local\Temp\scoped_dir8360_364683625\Crashpad\reports\9b047a10-4521-4492-bbb8-086dab33b11c.dmp: 지정된 경로를 찾을 수 없습니다. (0x3)
+[0603/143222.226:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[0603/154429.131:ERROR:file_io_win.cc(170)] CreateFile C:\Users\SUNDOO~1\AppData\Local\Temp\scoped_dir8360_364683625\Crashpad\reports\e68a814b-85ac-4f65-9baf-eb3ae665b59c.dmp: 지정된 경로를 찾을 수 없습니다. (0x3)
+[0603/154429.132:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed

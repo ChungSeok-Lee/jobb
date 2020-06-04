@@ -3,9 +3,9 @@ import pandas as pd
 import time
 
 
-driver = webdriver.Chrome('../chromedriver')
+driver = webdriver.Chrome('./chromedriver')
 
-df = pd.read_csv('../raw_data/url_list.csv')
+df = pd.read_csv('./raw_data/url_list.csv')
 df2 = df['0']
 # print(df2.head())
 
@@ -33,47 +33,53 @@ spec_dict = dict()
 
 major = []
 n = 0
-for url in df2:
-    # print(url)
-    driver.implicitly_wait(3)
-    time.sleep(1)
-    driver.get(url)
+try:
+    for url in df2[:1000]:
+        # print(url)
+        driver.implicitly_wait(3)
+        time.sleep(0.2)
+        driver.get(url)
 
-    company = driver.find_element_by_xpath('//*[@id="devPassSpecForm"]/div/h2/strong/a').text
-    title.append(company)
+        company = driver.find_element_by_xpath('//*[@id="devPassSpecForm"]/div/h2/strong/a').text
+        title.append(company)
 
-    spec = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[2]/div[1]/div/ul').text
-    specs = spec.split('\n')
+        driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[1]/ul/li[3]/a').click()
+        downSpec = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[4]/div[1]/div/ul').text
+        downSpecs = downSpec.split('\n')
 
-
-    # college = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[3]/div/div[2]/div[2]/div/ol[4]').text
-    # colleges = college.split('\n')
-
-    temp = [company]
-
-    for i, j in enumerate(specs):
-        word = j
-        if '보유' in str(word):
-            specs.remove(word)
+        # spec = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[2]/div[1]/div/ul').text
+        # specs = spec.split('\n')
 
 
-    for idx, spec in enumerate(specs):
-        if idx%2 != 0:
-            temp.append(spec)
-    spec_dict[n] = temp
-    n += 1
+        # college = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[3]/div/div[2]/div[2]/div/ol[4]').text
+        # colleges = college.split('\n')
 
+        temp = [company]
+
+        for i, j in enumerate(downSpecs):
+            word = j
+            if '보유' in str(word):
+                downSpecs.remove(word)
+
+
+        for idx, spec in enumerate(downSpecs):
+            if idx%2 != 0:
+                temp.append(spec)
+        spec_dict[n] = temp
+        n += 1
+except:
+    pass
 # print(spec_dict)
 
 df = pd.DataFrame.from_dict(spec_dict).T
 df.columns = features
 print(df.head())
-df.to_csv('../raw_data/body.csv', index=False)
+df.to_csv('./raw_data/down_body.csv', index=False)
 
 
-    # driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[1]/ul/li[2]/a').click()
-    # upSpec = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[3]/div[1]/div/ul').text
-    # upSpecs = upSpec.split('\n')
+# driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[1]/ul/li[2]/a').click()
+# upSpec = driver.find_element_by_xpath('//*[@id="container"]/div[2]/div[2]/div[2]/div[3]/div[3]/div[1]/div/ul').text
+# upSpecs = upSpec.split('\n')
 
 #     for i, j in enumerate(specs):
 #         word = j
@@ -126,3 +132,7 @@ df.to_csv('../raw_data/body.csv', index=False)
 # pdList = [title, grade, toeic, speaking, opic, lang, cert, abr, inte, prize, vol]  # List of your dataframes
 # new_df = pd.concat(pdList, axis=1)
 # print(new_df.head())
+
+
+df = pd.read_csv('./raw_data/down_body.csv')
+print(df.head())
